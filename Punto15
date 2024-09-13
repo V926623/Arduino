@@ -1,0 +1,46 @@
+int trigPin = 9;
+int echoPin = 10;
+int led1 = 7;
+int led2 = 6; 
+int led3 = 5; 
+long duration;
+int distance;
+
+void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2;
+
+  if (distance < 20) { // Distancia muy cerca
+    digitalWrite(led1, HIGH);
+    digitalWrite(led2, LOW);
+    digitalWrite(led3, LOW);
+  } else if (distance < 80) { // Distancia media
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, HIGH);
+    digitalWrite(led3, LOW);
+  } else { // Distancia larga
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, LOW);
+    digitalWrite(led3, HIGH);
+  }
+
+  Serial.print("Distancia: ");
+  Serial.println(distance);
+
+  delay(500);
+}
