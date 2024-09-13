@@ -1,20 +1,21 @@
-int Pin =A0;
-int ledPin = 9;
-int thresholdValue = 512;
+int led = 9;
+int pot = A0;
+int brillo;
 
 void setup() {
-  pinMode(ledPin, OUTPUT);
-  Serial.begin(9600);
+  pinMode(led, OUTPUT);
 }
 
 void loop() {
-  int potValue = analogRead(Pin);
-  Serial.println(potValue);
-  if (potValue > thresholdValue) {
-    digitalWrite(ledPin, HIGH);
+  int potValue = analogRead(pot);
+  float voltage = potValue * (5.0 / 1023.0);
+
+  if (voltage > 4.0) {
+    brillo = potValue / 4;
+    analogWrite(led, brillo);
   } else {
-    digitalWrite(ledPin, LOW);
+    analogWrite(led, 0);
   }
-  
-  delay(1000);
+
+  delay(500);
 }
