@@ -1,0 +1,33 @@
+int pirPin = 2;  
+int ledPin = 13; 
+unsigned long timer = 0;  
+bool ledOn = false;    
+bool pirState = LOW;      
+
+void setup() {
+  pinMode(pirPin, INPUT);  
+  pinMode(ledPin, OUTPUT); 
+  Serial.begin(9600);    
+}
+
+void loop() {
+  int pirValue = digitalRead(pirPin);  
+  if (pirValue == HIGH && pirState == LOW) {
+    Serial.println("Movimiento detectado!");
+    pirState = HIGH;  
+    digitalWrite(ledPin, HIGH);  
+    ledOn = true; 
+    timer = millis();  
+  }
+
+  if (pirValue == LOW && pirState == HIGH) {
+    pirState = LOW; 
+    Serial.println("se apagara en 5 mins.");
+  }
+
+  if (ledOn && millis() - timer >= 5 * 60 * 1000) {
+    digitalWrite(ledPin, LOW); 
+    ledOn = false; 
+    Serial.println("No se detecta movimiento.");
+  }
+}
