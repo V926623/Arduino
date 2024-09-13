@@ -1,0 +1,26 @@
+
+int motorPin = 9;
+int pwmValue = 0;
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  for (pwmValue = 0; pwmValue <= 255; pwmValue += 5) {
+    analogWrite(motorPin, pwmValue);
+    Serial.print("Velocidad PWM: ");
+    Serial.println(pwmValue);
+    delay(100);
+  }
+
+  for (pwmValue = 255; pwmValue >= 0; pwmValue -= 5) {
+    analogWrite(motorPin, pwmValue);
+    Serial.print("Velocidad PWM: ");
+    Serial.println(pwmValue);
+    delay(100);
+  }
+
+  delay(2000);
+}
