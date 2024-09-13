@@ -1,0 +1,39 @@
+int redLED = 2;
+int greenLED = 3;
+int blueLED = 4;
+
+void setup() {
+  pinMode(redLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+  pinMode(blueLED, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Ingrese 'r' para rojo, 'g' para verde, 'b' para azul:");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char color = Serial.read();
+    apagarLeds();
+    if (color == 'r') {
+      Serial.println("Encendiendo LED rojo");
+      digitalWrite(redLED, HIGH);
+    } 
+    else if (color == 'g') {
+      Serial.println("Encendiendo LED verde");
+      digitalWrite(greenLED, HIGH);
+    } 
+    else if (color == 'b') {
+      Serial.println("Encendiendo LED azul");
+      digitalWrite(blueLED, HIGH);
+    } 
+    else {
+      Serial.println("Color inválido, intente de nuevo.");
+    }
+  }
+}
+
+void apagarLeds() {
+  digitalWrite(redLED, LOW);
+  digitalWrite(greenLED, LOW);
+  digitalWrite(blueLED, LOW);
+}
