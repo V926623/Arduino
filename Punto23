@@ -1,0 +1,33 @@
+int pinRojo = 6;
+int pinVerde = 7;
+int pinAzul = 3;
+int tiempoPorColor = 1000;
+
+void establecerColor(int rojo, int verde, int azul) {
+  analogWrite(pinRojo, rojo);
+  analogWrite(pinVerde, verde);
+  analogWrite(pinAzul, azul);
+}
+
+void setup() {
+  pinMode(pinRojo, OUTPUT);
+  pinMode(pinVerde, OUTPUT);
+  pinMode(pinAzul, OUTPUT);
+}
+
+void loop() {
+  establecerColor(255, 0, 0); 
+  delay(tiempoPorColor);
+
+  establecerColor(0, 255, 0); 
+  delay(tiempoPorColor);
+
+  establecerColor(0, 0, 255); 
+  delay(tiempoPorColor);
+
+  establecerColor(255, 255, 0);
+  delay(tiempoPorColor);
+
+  establecerColor(255, 0, 255); 
+  delay(tiempoPorColor);
+}
