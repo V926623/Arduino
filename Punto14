@@ -1,0 +1,22 @@
+#include <Arduino.h>
+
+int motorPin = 9;
+int joystickPin = A0;
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int joystickValue = analogRead(joystickPin);
+  int motorSpeed = map(joystickValue, 0, 1023, 0, 255);
+  
+  analogWrite(motorPin, motorSpeed);
+  Serial.print("Joystick: ");
+  Serial.print(joystickValue);
+  Serial.print(" -> Motor Speed: ");
+  Serial.println(motorSpeed);
+
+  delay(100);
+}
