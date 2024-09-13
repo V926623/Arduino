@@ -1,0 +1,29 @@
+#include <Servo.h>
+
+Servo myServo;
+ldrPin = A0;
+servoPin = 9;
+int ldrValue;
+int angle;
+
+void setup() {
+  myServo.attach(servoPin);
+  Serial.begin(9600);
+}
+
+void loop() {
+  ldrValue = analogRead(ldrPin);
+  angle = map(ldrValue, 0, 1023, 0, 180);
+  myServo.write(angle);
+  delay(500);
+
+  if (angle < 60) {
+    Serial.println("Noche");
+  } 
+  else if (angle < 120) {
+    Serial.println("Mañana");
+  } 
+  else {
+    Serial.println("Tarde");
+  }
+}
